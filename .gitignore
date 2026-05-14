@@ -1,0 +1,17 @@
+.env
+*.env
+auth.json
+config.yaml
+config.yaml.bak*
+*.bak
+logs/
+sessions/
+pairing/
+audio_cache/
+image_cache/
+cron/
+git/
+memories/
+node_modules/
+__pycache__/
+*.log

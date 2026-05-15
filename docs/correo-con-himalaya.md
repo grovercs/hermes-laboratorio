@@ -143,3 +143,141 @@ Nota importante:
 Al usar `New-StoredCredential`, no mostrar nunca el objeto completo en pantalla porque puede imprimir el campo `Password`.
 
 Usar siempre `| Out-Null` al guardar la credencial.
+
+---
+
+## Hallazgo: lectura preview desde Hermes/Git Bash con config temporal
+
+Fecha: 16/05/2026
+
+Durante una revisión autorizada de correos concretos se detectó una diferencia entre PowerShell normal y Hermes/Git Bash al ejecutar Himalaya en Windows.
+
+### Problema detectado
+
+Desde PowerShell normal funciona la ruta del helper con barras invertidas:
+
+```text
+C:\Users\Usuario\.config\himalaya\get-imap-password.ps1
+```
+
+Desde Hermes/Git Bash, esa misma ruta con barras invertidas puede romperse al pasar por las capas de shell y llegar a PowerShell sin separadores, provocando un error similar a:
+
+```text
+C:UsersUsuario.confighimalayaget-imap-password.ps1
+```
+
+### Solución segura probada
+
+Se creó una configuración temporal de Himalaya sin secretos, sin modificar la configuración real, usando la ruta del helper en formato compatible con Git Bash:
+
+```text
+C:/Users/Usuario/.config/himalaya/get-imap-password.ps1
+```
+
+La línea usada en la config temporal fue:
+
+```toml
+backend.auth.cmd = "powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:/Users/Usuario/.config/himalaya/get-imap-password.ps1"
+```
+
+El patrón de lectura seguro fue:
+
+```bash
+himalaya --config .himalaya-temp-preview-vielhacomputer.toml message read --account vielhacomputer --folder INBOX --preview <ID>
+```
+
+### Resultado
+
+- La config temporal con ruta `C:/Users/Usuario/.config/himalaya/get-imap-password.ps1` funcionó correctamente desde Hermes/Git Bash.
+- La opción `--preview` permitió leer cuerpos de mensajes sin marcarlos como leídos.
+- La config temporal fue borrada al final.
+- No se modificó la config real de Himalaya.
+- No se modificó `get-imap-password.ps1`.
+- No se guardaron secretos.
+- No se abrieron adjuntos.
+- No se descargaron adjuntos.
+- No se siguieron enlaces.
+- No se movieron correos.
+- No se borraron correos.
+- No se marcaron correos como leídos/no leídos.
+- No se enviaron correos.
+
+### Regla operativa
+
+Para leer cuerpos desde Hermes/Git Bash sin marcar correos como leídos:
+
+1. Usar siempre `--preview`.
+2. Usar IDs concretos autorizados por Grover.
+3. Si la ruta del helper falla por barras invertidas, usar una config temporal sin secretos con ruta `C:/Users/Usuario/...`.
+4. Borrar siempre la config temporal al final.
+5. No abrir adjuntos, no seguir enlaces y no ejecutar acciones de impacto externo sin autorización explícita.
+
+---
+
+## Solución permanente aplicada: ruta del helper compatible con PowerShell y Hermes/Git Bash
+
+Fecha: 16/05/2026
+
+Se aplicó la solución permanente para que Himalaya use una ruta del helper compatible tanto con PowerShell normal como con Hermes/Git Bash.
+
+### Backup creado
+
+Antes de modificar la configuración real se creó este backup:
+
+```text
+C:\Users\Usuario\.config\himalaya\config.toml.backup-20260516-012630
+```
+
+### Config real modificada
+
+Archivo modificado:
+
+```text
+C:\Users\Usuario\.config\himalaya\config.toml
+```
+
+### Único cambio realizado
+
+La línea `backend.auth.cmd` ahora usa ruta con barras normales:
+
+```text
+C:/Users/Usuario/.config/himalaya/get-imap-password.ps1
+```
+
+Motivo: la ruta con barras invertidas funcionaba desde PowerShell normal, pero podía romperse desde Hermes/Git Bash al llegar a PowerShell sin separadores.
+
+### Pruebas realizadas
+
+```bash
+himalaya folder list --account vielhacomputer
+himalaya message read --account vielhacomputer --folder INBOX --preview 22395
+```
+
+### Resultado
+
+Ambas pruebas funcionaron correctamente:
+
+- `folder list` listó las carpetas IMAP de la cuenta `vielhacomputer`.
+- `message read --preview 22395` leyó el cuerpo del correo en modo preview.
+
+### Seguridad
+
+Durante la prueba:
+
+- No se abrieron adjuntos.
+- No se descargaron adjuntos.
+- No se siguieron enlaces.
+- No se movieron correos.
+- No se borraron correos.
+- No se marcaron correos como leídos/no leídos.
+- No se enviaron correos.
+
+### Nota
+
+Apareció el aviso no bloqueante:
+
+```text
+warning: Failed to set cwd to temp dir
+```
+
+El aviso no impidió que Himalaya funcionara correctamente.

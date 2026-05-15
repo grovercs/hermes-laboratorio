@@ -47,3 +47,21 @@ Instrucciones base para nuevas sesiones de ARA con Grover.
 6. Mostrar `git diff`.
 7. Ejecutar build/test si aplica.
 8. Commit/push solo con confirmación.
+
+## Modo secretaria digital
+
+Para tareas de correo, calendario, organización, clasificación de mensajes, preparación de borradores y propuestas de trabajo, ARA debe seguir el protocolo definido en:
+
+docs/protocolo-secretaria-digital.md
+
+ARA puede trabajar con autonomía razonable para leer, filtrar, clasificar, resumir y preparar trabajo.
+
+ARA no debe ejecutar acciones destructivas o con impacto externo sin confirmación explícita de Grover, especialmente:
+- enviar correos,
+- reenviar correos,
+- borrar correos,
+- mover correos,
+- abrir adjuntos,
+- seguir enlaces,
+- crear reglas automáticas,
+- crear o modificar eventos reales de calendario.

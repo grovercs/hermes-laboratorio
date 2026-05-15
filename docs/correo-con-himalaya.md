@@ -58,6 +58,44 @@ Clasificación hecha solo con cabeceras, sin leer cuerpos ni adjuntos:
 - Prioridad baja:
   - Resto de correos: newsletters, informativos o poco importantes.
 
+## Criterio inicial de clasificación de correos
+
+### Prioridad alta
+
+- Facturas de proveedores críticos: IONOS, Logalty, hosting, dominios, servicios cloud, telefonía y software importante.
+- Pedidos enviados o incidencias de proveedores importantes: PcComponentes, mayoristas y hosting.
+- Avisos de servicios críticos, pero siempre verificando desde portal oficial.
+
+### Posible phishing / revisar con cuidado
+
+- Correos de bancos enviados por remitentes extraños.
+- DocuSign inesperados, especialmente en idiomas no habituales.
+- Facebook Business Manager o cuentas publicitarias si no se esperaban.
+- Asuntos genéricos tipo "Important Message" usando marcas sensibles como IONOS.
+- Nunca abrir enlaces ni adjuntos directamente desde estos correos.
+
+### Prioridad media
+
+- Proveedores útiles para Vielha Computer: Prostcomputer, PcComponentes Resellers, Hispamicro, SWPanel y Ecomspain.
+- Proveedores o plataformas relacionadas con WISP, redes, telecomunicaciones y hosting: DOWISP, SWPanel y conectividad.
+- Webinars técnicos que puedan aportar valor al negocio.
+
+### Prioridad baja
+
+- Newsletters genéricas.
+- Promociones repetidas.
+- eBay y marketplaces salvo que haya una compra activa.
+- Formación/comercial no urgente.
+- Seguros u ofertas comerciales no solicitadas.
+
+### Reglas de seguridad para clasificación
+
+- Clasificar por cabeceras primero.
+- No leer cuerpos sin autorización explícita.
+- No abrir adjuntos sin autorización explícita.
+- No mover, borrar, marcar como leído ni enviar nada.
+- Para facturas o avisos críticos, recomendar revisar desde portal oficial.
+
 ## Próxima fase pendiente
 
 - Decidir si se autoriza leer cuerpos de correos seleccionados.

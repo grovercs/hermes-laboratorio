@@ -101,4 +101,45 @@ Clasificación hecha solo con cabeceras, sin leer cuerpos ni adjuntos:
 - Decidir si se autoriza leer cuerpos de correos seleccionados.
 - Alternativa segura: seguir trabajando solo con cabeceras/envelopes.
 - Si se autoriza lectura de cuerpos, definir antes una regla estricta: leer solo IDs concretos, sin adjuntos, sin mover, sin borrar, sin marcar como leído y sin responder automáticamente.
-- Decidir si en fase estable se migra el método de contraseña a Windows Credential Manager.
+- Método de contraseña migrado correctamente a Windows Credential Manager y probado con Himalaya.
+
+---
+
+## Estado actual: Himalaya con Windows Credential Manager
+
+Fecha: 15/05/2026
+
+Se ha configurado Himalaya para leer la contraseña IMAP desde Windows Credential Manager usando el target:
+
+```text
+himalaya:info@vielhacomputer.com
+```
+
+El archivo `config.toml` mantiene la autenticación mediante comando externo:
+
+```text
+C:\Users\Usuario\.config\himalaya\get-imap-password.ps1
+```
+
+Pruebas realizadas correctamente:
+
+```powershell
+himalaya folder list --account vielhacomputer
+himalaya envelope list --account vielhacomputer --folder INBOX --page 1 --page-size 10
+```
+
+Resultado:
+- Se listaron carpetas IMAP correctamente.
+- Se listaron cabeceras/envelopes de INBOX correctamente.
+- No se configuró SMTP.
+- No se enviaron correos.
+- No se leyeron cuerpos.
+- No se abrieron adjuntos.
+- No se movieron ni borraron mensajes.
+- No se marcaron mensajes como leídos.
+- No se guardó ninguna contraseña en texto plano dentro del repositorio.
+
+Nota importante:
+Al usar `New-StoredCredential`, no mostrar nunca el objeto completo en pantalla porque puede imprimir el campo `Password`.
+
+Usar siempre `| Out-Null` al guardar la credencial.

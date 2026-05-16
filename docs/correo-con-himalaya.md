@@ -281,3 +281,77 @@ warning: Failed to set cwd to temp dir
 ```
 
 El aviso no impidió que Himalaya funcionara correctamente.
+
+---
+
+## Prueba mínima de limpieza IMAP
+
+Fecha: 16/05/2026
+
+Se realizó una prueba mínima de limpieza por IMAP, sin SMTP, para validar el flujo de crear una carpeta de revisión y mover únicamente correos autorizados.
+
+### Acciones ejecutadas
+
+Se creó la carpeta de revisión:
+
+```bash
+himalaya folder add --account vielhacomputer ARA_Revisar_Basura
+```
+
+Se movieron solo los IDs autorizados `22418` y `22417` desde `INBOX` a `ARA_Revisar_Basura`:
+
+```bash
+himalaya message move --account vielhacomputer --folder INBOX ARA_Revisar_Basura 22418 22417
+```
+
+Después se listaron las carpetas:
+
+```bash
+himalaya folder list --account vielhacomputer
+```
+
+Se listaron las cabeceras de la carpeta destino:
+
+```bash
+himalaya envelope list --account vielhacomputer --folder ARA_Revisar_Basura --page 1 --page-size 10
+```
+
+Y se listaron los últimos 30 correos de `INBOX`:
+
+```bash
+himalaya envelope list --account vielhacomputer --folder INBOX --page 1 --page-size 30
+```
+
+### Resultado
+
+- La carpeta `ARA_Revisar_Basura` se creó correctamente.
+- Se movieron solo los IDs autorizados `22418` y `22417` desde `INBOX`.
+- Los correos llegaron correctamente a `ARA_Revisar_Basura`.
+- En la carpeta destino, Himalaya les asignó nuevos IDs relativos: `2` y `1`.
+- Los IDs originales `22418` y `22417` ya no aparecen en los últimos 30 de `INBOX`.
+
+### Seguridad
+
+Durante la prueba:
+
+- No se borró nada.
+- No se marcó ningún correo como leído/no leído.
+- No se abrieron adjuntos.
+- No se descargaron adjuntos.
+- No se siguieron enlaces.
+- No se configuró SMTP.
+- No se respondió ni se envió ningún correo.
+- No se crearon reglas.
+- No se movió ningún correo fuera de los IDs autorizados.
+
+### Advertencia importante sobre IDs
+
+Los IDs de Himalaya son relativos a la carpeta. Al mover un correo desde `INBOX` a otra carpeta, el mensaje puede recibir un ID distinto en la carpeta destino.
+
+Regla operativa:
+
+1. Confirmar siempre la carpeta origen.
+2. Confirmar siempre los IDs actuales en esa carpeta antes de mover o borrar.
+3. Usar siempre `--folder INBOX` cuando el origen sea `INBOX`.
+4. Después de mover, listar la carpeta destino y la carpeta origen para verificar el resultado.
+5. No borrar mensajes salvo autorización explícita y tras confirmar carpeta e IDs actuales.

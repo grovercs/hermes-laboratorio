@@ -280,6 +280,69 @@ hermes status
 
 Siempre usando el `HERMES_HOME` de `ara-lab`.
 
+#### Prueba realizada de `ara-lab`
+
+Se creó la instancia vacía:
+
+```text
+C:\proyectos\hermes\instances\ara-lab
+```
+
+La instancia se creó como laboratorio limpio, sin copiar secretos ni estado real de ARA principal.
+
+Con `HERMES_HOME` apuntando a:
+
+```text
+C:\proyectos\hermes\instances\ara-lab
+```
+
+se confirmó que Hermes detecta esa carpeta como HOME real de datos/configuración.
+
+Rutas detectadas por Hermes:
+
+```text
+config path: C:\proyectos\hermes\instances\ara-lab\config.yaml
+env path:    C:\proyectos\hermes\instances\ara-lab\.env
+```
+
+Durante la prueba, `hermes status` también buscó `auth.json` dentro de `ara-lab`:
+
+```text
+C:\proyectos\hermes\instances\ara-lab\auth.json
+```
+
+Esto confirma que la ruta de autenticación también queda bajo el HOME aislado.
+
+Cambios observados dentro de `ara-lab`:
+
+- Se creó `auth.lock`.
+- Se actualizó la carpeta `logs`.
+
+Límites respetados durante la prueba:
+
+- No se copiaron secretos.
+- No se abrió `.env`.
+- No se abrió `auth.json`.
+- No se tocó la instancia real `C:\Users\Usuario\AppData\Local\hermes`.
+- No se arrancó gateway.
+- No se arrancó dashboard.
+- No se configuró Telegram.
+- No se configuró correo.
+- No se tocó Himalaya.
+
+Aviso importante de Windows:
+
+Llamar directamente a `hermes.exe` desde PowerShell/Git Bash puede fallar según políticas locales:
+
+- En PowerShell puede aparecer bloqueo por Control de aplicaciones.
+- En Git Bash puede aparecer `Permission denied`.
+
+En esta prueba, ejecutar la CLI de Hermes mediante el Python del venv sí permitió verificar correctamente `HERMES_HOME`.
+
+Conclusión de la prueba:
+
+`HERMES_HOME` sirve para crear instancias Hermes aisladas en Windows, pero conviene diseñar wrappers de arranque compatibles con Windows para evitar bloqueos de ejecución directa y asegurar que todos los subprocesos heredan el HOME correcto.
+
 ### Fase 4: Probar API Server/Desktop contra `ara-lab`
 
 Solo después de verificar `ara-lab`:

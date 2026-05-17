@@ -22,14 +22,14 @@ Probar casos ficticios de redes sociales antes de conectar cuentas reales o trab
 
 1. [Caso 001 — Auto Val d’Aran — Reseña negativa ficticia](caso-001-autoval-resena-negativa.md)
 2. [Caso 002 — Auto Val d’Aran — Calendario ficticio de 7 posts](caso-002-autoval-calendario-7-posts.md)
+3. [Caso 003 — VielhaComputer — Facebook tecnología fácil](caso-003-vielhacomputer-facebook-tecnologia-facil.md)
 
 ### Pendientes
 
-3. Post ficticio para Azul Aran S.L.
 4. Respuesta ficticia a comentario positivo de Restaurante Tritón.
 5. Simulación de crisis reputacional leve.
 
 ## Estado
 
 Laboratorio inicial creado.  
-Primeros casos ficticios documentados.
+Tres casos ficticios documentados.

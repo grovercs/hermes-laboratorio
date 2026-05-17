@@ -28,14 +28,19 @@ Probar casos ficticios de redes sociales antes de conectar cuentas reales o trab
 
 1. [Plantilla — Facebook VielhaComputer — Tecnología fácil](plantilla-facebook-vielhacomputer.md)
 
+## Ejemplos generados
+
+1. [Ejemplo 001 — VielhaComputer — 3 posts Facebook tecnología fácil](ejemplo-001-vielhacomputer-3-posts-facebook.md)
+
 ## Pendientes
 
 1. Respuesta ficticia a comentario positivo de Restaurante Tritón.
 2. Simulación de crisis reputacional leve.
-3. Crear ejemplos reales simulados usando la plantilla de Facebook de VielhaComputer.
+3. Crear más ejemplos simulados usando la plantilla de Facebook de VielhaComputer.
 
 ## Estado
 
 Laboratorio inicial creado.  
 Tres casos ficticios documentados.  
-Primera plantilla reutilizable creada para Facebook de VielhaComputer.
+Primera plantilla reutilizable creada para Facebook de VielhaComputer.  
+Primer ejemplo de posts simulados creado.

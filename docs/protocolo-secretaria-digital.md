@@ -152,39 +152,72 @@ Cuando Grover pida revisar correo por Telegram, ARA debe responder en formato m�
 Reglas:
 
 - Empezar con un resumen ejecutivo de 2-4 líneas.
+- Usar emojis simples por defecto como separadores visuales.
 - No pegar listas enormes por defecto.
 - Mostrar como máximo 5 prioridades salvo que Grover pida detalle.
 - Indicar claramente qué se revisó y qué no se tocó.
 - Dejar una siguiente pregunta sugerida para avanzar.
 - El detalle completo solo se muestra si Grover lo pide.
 
+Emojis estándar:
+
+- 📬 buzón
+- 🔎 revisados
+- 📖 cuerpos leídos
+- 📎 adjuntos
+- 🔗 enlaces
+- ⚙️ acciones
+- 🧭 resumen
+- 📊 categorías
+- 🚨 urgente
+- ⭐ importante
+- ✉️ posible respuesta
+- 🧾 facturas/proveedores
+- ⚠️ phishing/sospechoso
+- 🗞️ ruido/newsletters
+- 🎯 top prioridades
+- 👉 siguiente pregunta
+
 Plantilla recomendada:
 
 ```text
-Buzón: <cuenta/carpeta>
-Revisados: <n> correos
-Cuerpos leídos: <n>
-Adjuntos abiertos: 0
-Enlaces abiertos: 0
-Acciones ejecutadas: ninguna / <acción confirmada>
+📬 Buzón: <cuenta/carpeta>
+🔎 Revisados: <n> correos
+📖 Cuerpos leídos: <n>
+📎 Adjuntos abiertos: 0
+🔗 Enlaces abiertos: 0
+⚙️ Acciones ejecutadas: ninguna / <acción confirmada>
 
-Resumen:
+🧭 Resumen:
 <2-4 líneas>
 
-Categorías:
-- Urgente: <n>
-- Importante: <n>
-- Respuesta necesaria: <n>
-- Facturas/proveedores: <n>
-- Phishing/sospechoso: <n>
-- Ruido/newsletters: <n>
+📊 Categorías:
+- 🚨 Urgente: <n>
+- ⭐ Importante: <n>
+- ✉️ Respuesta necesaria: <n>
+- 🧾 Facturas/proveedores: <n>
+- ⚠️ Phishing/sospechoso: <n>
+- 🗞️ Ruido/newsletters: <n>
 
-Top 5:
+🎯 Top 5:
 1. <ID> — <asunto corto> — <acción recomendada>
 2. ...
 
-Siguiente pregunta:
+👉 Siguiente pregunta:
 ¿Quieres que lea en preview los IDs <x>, <y>?
+```
+
+Ejemplo corto:
+
+```text
+📬 Buzón: info / INBOX
+🔎 Revisados: 20
+📖 Cuerpos leídos: 0
+📎 Adjuntos: 0 | 🔗 Enlaces: 0 | ⚙️ Acciones: ninguna
+
+🧭 Resumen: 1 sospechoso, 2 importantes y bastante ruido.
+🎯 Top 5: 123 — factura proveedor — verificar por portal oficial.
+👉 ¿Quieres que lea en preview el ID 123?
 ```
 
 ### Informe completo

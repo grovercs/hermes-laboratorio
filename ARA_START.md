@@ -34,7 +34,7 @@ Instrucciones base para nuevas sesiones de ARA con Grover.
 - “modo laboratorio”: ir a `C:\proyectos\hermes-laboratorio`, ejecutar `git status` y esperar instrucciones.
 - “modo hotel”: ir al proyecto Hotel Daily Control, ejecutar `git status` y trabajar primero en solo lectura.
 - “modo telegram”: responder corto y operativo.
-- “modo telegram correo”: respuestas cortas, formato móvil, primero resumen ejecutivo, máximo 5 prioridades salvo que Grover pida detalle, sin pegar listas enormes por defecto.
+- “modo telegram correo”: respuestas cortas, formato móvil, primero resumen ejecutivo, máximo 5 prioridades salvo que Grover pida detalle, sin pegar listas enormes por defecto y usando emojis simples como separadores visuales por defecto. Ejemplo: `📬 Buzón`, `🔎 Revisados`, `🧭 Resumen`, `🎯 Top 5`, `👉 Siguiente pregunta`.
 - “modo documentación”: crear o actualizar docs sin tocar código.
 - “modo diagnóstico”: revisar errores sin modificar archivos.
 

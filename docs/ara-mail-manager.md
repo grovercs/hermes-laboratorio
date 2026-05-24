@@ -177,7 +177,7 @@ Importante: al crear credenciales con `New-StoredCredential`, evitar imprimir el
 
 ## Formato recomendado para triage por Telegram
 
-El triage por Telegram debe ser corto, claro y accionable. ARA no debe pegar listas largas por defecto; el detalle completo solo se muestra si Grover lo pide.
+El triage por Telegram debe ser corto, claro y accionable. ARA no debe pegar listas largas por defecto; el detalle completo solo se muestra si Grover lo pide. Por defecto debe usar emojis simples como separadores visuales.
 
 ### Datos mínimos que debe incluir
 
@@ -191,36 +191,69 @@ El triage por Telegram debe ser corto, claro y accionable. ARA no debe pegar lis
 - Top 5 prioridades.
 - Siguiente pregunta sugerida.
 
+### Emojis estándar
+
+- 📬 buzón
+- 🔎 revisados
+- 📖 cuerpos leídos
+- 📎 adjuntos
+- 🔗 enlaces
+- ⚙️ acciones
+- 🧭 resumen
+- 📊 categorías
+- 🚨 urgente
+- ⭐ importante
+- ✉️ posible respuesta
+- 🧾 facturas/proveedores
+- ⚠️ phishing/sospechoso
+- 🗞️ ruido/newsletters
+- 🎯 top prioridades
+- 👉 siguiente pregunta
+
 ### Plantilla móvil
 
 ```text
-Buzón: <buzón/carpeta>
-Revisados: <n>
-Cuerpos leídos: <n>
-Adjuntos abiertos: 0
-Enlaces abiertos: 0
-Acciones ejecutadas: ninguna / <acción confirmada>
+📬 Buzón: <buzón/carpeta>
+🔎 Revisados: <n>
+📖 Cuerpos leídos: <n>
+📎 Adjuntos abiertos: 0
+🔗 Enlaces abiertos: 0
+⚙️ Acciones ejecutadas: ninguna / <acción confirmada>
 
-Resumen:
+🧭 Resumen:
 <2-4 líneas con lo más importante>
 
-Categorías:
-- Urgente: <n>
-- Importante: <n>
-- Posible respuesta: <n>
-- Facturas/proveedores: <n>
-- Posible phishing: <n>
-- Ruido/newsletters: <n>
+📊 Categorías:
+- 🚨 Urgente: <n>
+- ⭐ Importante: <n>
+- ✉️ Posible respuesta: <n>
+- 🧾 Facturas/proveedores: <n>
+- ⚠️ Posible phishing: <n>
+- 🗞️ Ruido/newsletters: <n>
 
-Top 5 prioridades:
+🎯 Top 5 prioridades:
 1. <ID> — <asunto corto> — <recomendación>
 2. <ID> — <asunto corto> — <recomendación>
 3. <ID> — <asunto corto> — <recomendación>
 4. <ID> — <asunto corto> — <recomendación>
 5. <ID> — <asunto corto> — <recomendación>
 
-Siguiente pregunta:
+👉 Siguiente pregunta:
 ¿Quieres que lea en preview los IDs <x>, <y> o que proponga limpieza reversible?
+```
+
+Ejemplo corto:
+
+```text
+📬 Buzón: info / INBOX
+🔎 Revisados: 20
+📖 Cuerpos leídos: 0
+📎 Adjuntos: 0 | 🔗 Enlaces: 0 | ⚙️ Acciones: ninguna
+
+🧭 Resumen: 1 phishing probable, 2 proveedores útiles y ruido comercial.
+📊 Categorías: 🚨0 ⭐2 ✉️1 🧾3 ⚠️1 🗞️13
+🎯 Top 5: 123 — asunto corto — leer en preview si confirmas.
+👉 ¿Quieres preview seguro del ID 123?
 ```
 
 ### Regla de detalle

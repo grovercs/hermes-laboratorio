@@ -31,7 +31,7 @@ $env:HERMES_HOME = "C:\Users\Usuario\AppData\Local\hermes"
 
 - Buzón: `info@vielhacomputer.com`
 - Cuenta Himalaya: `vielhacomputer`
-- Uso actual: IMAP / lectura y triage seguro bajo supervisión.
+- Uso actual: IMAP / lectura, triage seguro y SMTP validado bajo supervisión.
 
 ## 5. Credential Manager + Himalaya
 
@@ -52,7 +52,7 @@ Modo seguro de correo por defecto:
 - No responder ni enviar correos sin confirmación explícita.
 - No mover correos sin confirmación explícita.
 - No crear reglas automáticas sin confirmación explícita.
-- No configurar SMTP/salida de correo sin confirmación explícita.
+- No configurar ni usar SMTP/salida de correo sin confirmación explícita.
 - Si Grover dice “borrar”, interpretar primero como propuesta reversible: mover a carpeta de revisión, no eliminar definitivamente.
 
 ## 7. Formato Telegram
@@ -96,7 +96,41 @@ Caso validado:
   - nuevo ID `3`: correo que antes era `22448`.
   - nuevo ID `4`: correo que antes era `22455`.
 
-## 9. Pendientes técnicos
+## 9. Flujo SMTP validado
+
+Fecha: 2026-05-24
+
+Se validó SMTP completo para el buzón `info@vielhacomputer.com` usando Himalaya e IONOS, siempre bajo confirmación explícita de Grover.
+
+Resumen del hito:
+
+- SMTP quedó configurado en Himalaya para la cuenta `vielhacomputer`.
+- Se creó helper SMTP local sin secreto embebido.
+- Se creó credencial separada en Windows Credential Manager para SMTP: `himalaya:info@vielhacomputer.com:smtp`.
+- Primera prueba controlada: el correo llegó a `grovercs@gmail.com`, confirmando que SMTP funcionaba.
+- La primera prueba falló al guardar copia en enviados porque faltaba alias de carpeta `sent`.
+- Se corrigió añadiendo en `config.toml`:
+
+```toml
+folder.aliases.sent = "Elementos enviados"
+```
+
+- Segunda prueba controlada:
+  - asunto: `Prueba ARA Mail Manager SMTP - enviados OK`
+  - resultado: `Message successfully sent!`
+  - código: `SEND_EXIT_CODE=0`
+  - el correo llegó a `grovercs@gmail.com`
+  - Himalaya guardó copia en `Elementos enviados` con ID `32`.
+
+Límites respetados:
+
+- No se respondieron correos reales.
+- No se abrieron adjuntos.
+- No se siguieron enlaces.
+- No se mostraron secretos.
+- Los envíos fueron pruebas controladas y confirmadas explícitamente.
+
+## 10. Pendientes técnicos
 
 Continuación documentada en `docs/ara-mail-manager-siguiente-fase.md`.
 
@@ -106,7 +140,7 @@ Continuación documentada en `docs/ara-mail-manager-siguiente-fase.md`.
 - Investigar fallback de proveedor/modelo.
 - Investigar configuración de compresión/contexto.
 
-## 10. Regla de rendimiento
+## 11. Regla de rendimiento
 
 - Usar Telegram para tareas cortas, decisiones rápidas y triage operativo.
 - Usar consola para documentación, Git y cambios de repo.

@@ -13,25 +13,27 @@ Usar Himalaya CLI para revisar correo bajo demanda con ARA, de forma controlada 
 - Shim: `C:\Users\Usuario\scoop\shims\himalaya`.
 - Configuración IMAP funcional para la cuenta `vielhacomputer`.
 - CredentialManager está instalado y se usa para guardar la contraseña fuera del repositorio.
-- Target de Windows Credential Manager usado: `himalaya:info@vielhacomputer.com`.
+- Target de Windows Credential Manager usado para IMAP: `himalaya:info@vielhacomputer.com`.
 - La configuración real de Himalaya no contiene contraseña en texto plano.
-- Helper local existente y probado: `C:\Users\Usuario\.config\himalaya\get-imap-password.ps1`.
-- El `config.toml` real usa ruta compatible con PowerShell y Hermes/Git Bash: `C:/Users/Usuario/.config/himalaya/get-imap-password.ps1`.
+- Helper IMAP local existente y probado: `C:\Users\Usuario\.config\himalaya\get-imap-password.ps1`.
+- El `config.toml` real usa ruta IMAP compatible con PowerShell y Hermes/Git Bash: `C:/Users/Usuario/.config/himalaya/get-imap-password.ps1`.
 - Himalaya lista carpetas correctamente.
 - Himalaya lee previews correctamente con `message read --preview`.
-- No hay SMTP configurado.
+- SMTP configurado y validado para envío controlado mediante IONOS.
+- Target de Windows Credential Manager usado para SMTP: `himalaya:info@vielhacomputer.com:smtp`.
+- Helper SMTP local existente y probado: `C:\Users\Usuario\.config\himalaya\get-smtp-password.ps1`.
+- Alias de enviados configurado: `folder.aliases.sent = "Elementos enviados"`.
 - No se han guardado credenciales en el repositorio.
 - No se han abierto adjuntos.
 - No se han seguido enlaces.
-- No se han enviado correos.
+- Se han enviado únicamente pruebas SMTP controladas y confirmadas explícitamente.
 - No se han borrado correos.
 - Ya existe una prueba real posterior de acción reversible por Telegram: mover correos autorizados a `ARA_Revisar_Basura` sin borrado definitivo.
 
 ## Reglas de seguridad
 
-- Solo IMAP por ahora.
-- Nada de SMTP configurado.
-- No enviar correos.
+- IMAP y SMTP están configurados, pero el modo seguro sigue siendo supervisado.
+- No enviar correos sin confirmación explícita.
 - No borrar correos.
 - No mover correos.
 - No marcar correos como leídos.
@@ -66,13 +68,16 @@ C:/Users/Usuario/.config/himalaya/get-imap-password.ps1
 
 - Himalaya lista carpetas correctamente.
 - Himalaya lee previews correctamente con `--preview`.
-- No hay SMTP configurado.
+- SMTP configurado y validado para pruebas controladas.
+- Target SMTP separado en Windows Credential Manager: `himalaya:info@vielhacomputer.com:smtp`.
+- Helper SMTP: `C:\Users\Usuario\.config\himalaya\get-smtp-password.ps1`.
+- Alias de enviados: `folder.aliases.sent = "Elementos enviados"`.
 
 Límites respetados en el estado actual:
 
 - No se han abierto adjuntos.
 - No se han seguido enlaces.
-- No se han enviado correos.
+- Se han enviado únicamente pruebas SMTP controladas y confirmadas explícitamente.
 - No se han borrado correos.
 - Ya existe una prueba real posterior de acción reversible por Telegram: mover correos autorizados a `ARA_Revisar_Basura` sin borrado definitivo.
 
@@ -452,3 +457,81 @@ himalaya message move --account vielhacomputer --folder INBOX ARA_Revisar_Basura
 ```
 
 Recordatorio: los IDs son relativos a cada carpeta; después de mover, relistar siempre origen y destino.
+
+---
+
+## Validación completa SMTP con Himalaya
+
+Fecha: 24/05/2026
+
+Se configuró y validó SMTP para `info@vielhacomputer.com` usando Himalaya con IONOS, manteniendo separación entre IMAP y SMTP y sin guardar secretos en el repositorio.
+
+### Configuración segura
+
+- Cuenta Himalaya: `vielhacomputer`.
+- Origen SMTP validado: `info@vielhacomputer.com`.
+- Proveedor SMTP: IONOS.
+- Target IMAP en Windows Credential Manager: `himalaya:info@vielhacomputer.com`.
+- Target SMTP separado en Windows Credential Manager: `himalaya:info@vielhacomputer.com:smtp`.
+- Helper IMAP: `C:\Users\Usuario\.config\himalaya\get-imap-password.ps1`.
+- Helper SMTP: `C:\Users\Usuario\.config\himalaya\get-smtp-password.ps1`.
+- Los helpers no contienen contraseñas embebidas; leen desde Windows Credential Manager.
+- La configuración real no guarda contraseña en texto plano.
+
+### Alias de carpetas
+
+Para evitar fallos al guardar copia en enviados, se añadió:
+
+```toml
+folder.aliases.sent = "Elementos enviados"
+```
+
+Alias relevantes confirmados:
+
+```toml
+folder.aliases.inbox = "INBOX"
+folder.aliases.sent = "Elementos enviados"
+```
+
+### Primera prueba SMTP
+
+- Destino: `grovercs@gmail.com`.
+- Resultado observado: el correo llegó correctamente.
+- Himalaya devolvió error posterior al envío al intentar guardar copia IMAP en enviados:
+  - `cannot add IMAP message`
+  - `folder does not exist`
+- Interpretación: SMTP funcionó, pero faltaba alias de carpeta `sent`.
+- Regla aprendida: no reintentar automáticamente un envío si falla el guardado en enviados, porque el SMTP puede haber entregado el correo y un reintento podría duplicarlo.
+
+### Corrección aplicada
+
+Se hizo backup de `config.toml` y se añadió solo:
+
+```toml
+folder.aliases.sent = "Elementos enviados"
+```
+
+No se cambiaron IMAP, SMTP, credenciales ni helpers.
+
+### Segunda prueba SMTP validada
+
+- Asunto: `Prueba ARA Mail Manager SMTP - enviados OK`.
+- Destino: `grovercs@gmail.com`.
+- Resultado de Himalaya:
+
+```text
+Message successfully sent!
+SEND_EXIT_CODE=0
+```
+
+- El correo llegó a `grovercs@gmail.com`.
+- Himalaya guardó copia en `Elementos enviados` con ID `32`.
+
+### Seguridad respetada
+
+- No se respondieron correos reales.
+- No se abrieron adjuntos.
+- No se siguieron enlaces.
+- No se mostraron secretos.
+- No se guardaron contraseñas, tokens ni claves en Git.
+- Los envíos fueron pruebas controladas y confirmadas explícitamente por Grover.

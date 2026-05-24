@@ -11,6 +11,8 @@ Registro de tiempo dedicado al diseño y creación de ARA Mail Manager.
 - Horas: pendiente de completar al cierre de la sesión
 - Validación real por Telegram: se confirmó el flujo supervisado con Gateway activo para `info@vielhacomputer.com`: triage por cabeceras, preview autorizado de IDs concretos, propuesta de acción reversible, confirmación explícita y movimiento verificado a `ARA_Revisar_Basura`.
 - Horas de esta validación: pendiente de cierre
+- Validación SMTP completa: se configuró SMTP para `info@vielhacomputer.com` con IONOS, helper SMTP y credencial separada en Windows Credential Manager; tras corregir `folder.aliases.sent = "Elementos enviados"`, la segunda prueba terminó con `Message successfully sent!`, `SEND_EXIT_CODE=0`, llegada confirmada a `grovercs@gmail.com` y copia guardada en `Elementos enviados` con ID `32`.
+- Horas de esta validación SMTP: pendiente de cierre
 
 ## Seguridad
 

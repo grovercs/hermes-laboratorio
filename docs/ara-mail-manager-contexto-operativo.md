@@ -137,7 +137,7 @@ Continuación documentada en `docs/ara-mail-manager-siguiente-fase.md`.
 - No hay conexión/proveedor secundario validado.
 - No hay selección automática de modelo según dificultad.
 - Investigar modelos de mayor contexto en `ara-lab`.
-- Investigar fallback de proveedor/modelo.
+- Investigar fallback de proveedor/modelo → ver `docs/ara-modelos-y-failover.md`.
 - Investigar configuración de compresión/contexto.
 
 ## 11. Regla de rendimiento

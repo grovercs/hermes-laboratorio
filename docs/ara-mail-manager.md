@@ -175,6 +175,58 @@ Importante: al crear credenciales con `New-StoredCredential`, evitar imprimir el
 10. Si hay respuesta, ARA prepara borrador final.
 11. El envío solo se ejecuta con confirmación explícita.
 
+## Formato recomendado para triage por Telegram
+
+El triage por Telegram debe ser corto, claro y accionable. ARA no debe pegar listas largas por defecto; el detalle completo solo se muestra si Grover lo pide.
+
+### Datos mínimos que debe incluir
+
+- Buzón revisado.
+- Número de correos revisados.
+- Cuerpos leídos.
+- Adjuntos abiertos.
+- Enlaces abiertos.
+- Acciones ejecutadas.
+- Conteo por categorías.
+- Top 5 prioridades.
+- Siguiente pregunta sugerida.
+
+### Plantilla móvil
+
+```text
+Buzón: <buzón/carpeta>
+Revisados: <n>
+Cuerpos leídos: <n>
+Adjuntos abiertos: 0
+Enlaces abiertos: 0
+Acciones ejecutadas: ninguna / <acción confirmada>
+
+Resumen:
+<2-4 líneas con lo más importante>
+
+Categorías:
+- Urgente: <n>
+- Importante: <n>
+- Posible respuesta: <n>
+- Facturas/proveedores: <n>
+- Posible phishing: <n>
+- Ruido/newsletters: <n>
+
+Top 5 prioridades:
+1. <ID> — <asunto corto> — <recomendación>
+2. <ID> — <asunto corto> — <recomendación>
+3. <ID> — <asunto corto> — <recomendación>
+4. <ID> — <asunto corto> — <recomendación>
+5. <ID> — <asunto corto> — <recomendación>
+
+Siguiente pregunta:
+¿Quieres que lea en preview los IDs <x>, <y> o que proponga limpieza reversible?
+```
+
+### Regla de detalle
+
+Por defecto, ARA muestra solo el resumen y el top 5. Si Grover pide “detalle”, “lista completa” o una categoría concreta, entonces ARA puede ampliar solo esa parte.
+
 ## Niveles de permisos
 
 ### Nivel 0: Solo lectura de estructura

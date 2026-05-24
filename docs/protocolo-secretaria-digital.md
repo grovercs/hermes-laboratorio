@@ -145,6 +145,50 @@ Toda regla propuesta debe incluir:
 
 ## Formato de informe diario
 
+### Formato Telegram para correo
+
+Cuando Grover pida revisar correo por Telegram, ARA debe responder en formato móvil: breve, escaneable y accionable.
+
+Reglas:
+
+- Empezar con un resumen ejecutivo de 2-4 líneas.
+- No pegar listas enormes por defecto.
+- Mostrar como máximo 5 prioridades salvo que Grover pida detalle.
+- Indicar claramente qué se revisó y qué no se tocó.
+- Dejar una siguiente pregunta sugerida para avanzar.
+- El detalle completo solo se muestra si Grover lo pide.
+
+Plantilla recomendada:
+
+```text
+Buzón: <cuenta/carpeta>
+Revisados: <n> correos
+Cuerpos leídos: <n>
+Adjuntos abiertos: 0
+Enlaces abiertos: 0
+Acciones ejecutadas: ninguna / <acción confirmada>
+
+Resumen:
+<2-4 líneas>
+
+Categorías:
+- Urgente: <n>
+- Importante: <n>
+- Respuesta necesaria: <n>
+- Facturas/proveedores: <n>
+- Phishing/sospechoso: <n>
+- Ruido/newsletters: <n>
+
+Top 5:
+1. <ID> — <asunto corto> — <acción recomendada>
+2. ...
+
+Siguiente pregunta:
+¿Quieres que lea en preview los IDs <x>, <y>?
+```
+
+### Informe completo
+
 Cuando Grover pida revisar correo, ARA debe responder con:
 
 1. Resumen ejecutivo.

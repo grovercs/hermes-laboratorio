@@ -1,0 +1,23 @@
+# Plantilla no secreta — buzones autorizados para ARA Mail Manager
+# No guardar contraseñas, tokens, auth.json, .env ni cuerpos de correos aquí.
+
+client_id: cliente-demo
+owner_display_name: Cliente Demo
+
+mailboxes:
+  - id: mailbox-demo-imap
+    label: Cliente Demo / info
+    account_alias: mailbox-demo
+    email: info@example.invalid
+    provider: ionos
+    protocol: imap
+    status: pilot_validated
+    credential_backend: windows_credential_manager
+    credential_target: himalaya:info@example.invalid
+    himalaya_account: mailbox-demo
+    default_folder: INBOX
+    review_folder: ARA_Revisar_Basura
+    notes:
+      - IMAP probado con Himalaya.
+      - SMTP fuera de alcance en fase actual.
+      - Triage validado por Telegram bajo supervisión.

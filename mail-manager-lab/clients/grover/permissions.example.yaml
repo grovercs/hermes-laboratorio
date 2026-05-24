@@ -1,0 +1,45 @@
+# Plantilla no secreta — permisos por buzón
+# Principio: todo impacto externo requiere confirmación explícita.
+
+client_id: cliente-demo
+mailbox_id: mailbox-demo-imap
+
+levels:
+  default:
+    allowed:
+      - list_folders
+      - list_envelopes
+      - classify_headers
+      - propose_actions
+    requires_confirmation:
+      - preview_message_by_id
+      - move_to_review_folder
+      - create_review_folder
+      - prepare_reply_draft
+    forbidden:
+      - delete_permanently
+      - mark_seen_or_unseen
+      - open_attachments
+      - download_attachments
+      - follow_links
+      - send_email
+      - configure_smtp
+      - create_automatic_rules
+
+confirmation_policy:
+  preview_message_by_id:
+    required_fields:
+      - mailbox_id
+      - folder
+      - message_ids
+      - explicit_use_preview_flag
+  move_to_review_folder:
+    required_fields:
+      - mailbox_id
+      - source_folder
+      - destination_folder
+      - current_message_ids
+      - exact_command_preview
+      - final_human_confirmation
+  send_email:
+    status: disabled_in_current_phase

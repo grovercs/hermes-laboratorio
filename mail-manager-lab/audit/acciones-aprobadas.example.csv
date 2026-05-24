@@ -1,0 +1,2 @@
+timestamp,client_id,mailbox_id,source_folder,message_ids,proposed_action,approved_action,approved_by,result,notes
+2026-05-24T00:00:00Z,cliente-demo,mailbox-demo-imap,INBOX,"<ID1> <ID2>",move_to_review,move_to_ARA_Revisar_Basura,usuario autorizado,verified,"Ejemplo documentado; no incluir cuerpos de correo ni secretos"

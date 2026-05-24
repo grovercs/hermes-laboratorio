@@ -1,0 +1,47 @@
+# Plantilla no secreta — carpetas conocidas y uso recomendado
+
+client_id: cliente-demo
+mailbox_id: mailbox-demo-imap
+
+folders:
+  inbox:
+    name: INBOX
+    purpose: entrada_principal
+    allowed_default_actions:
+      - list_envelopes
+      - classify_headers
+  review_spam:
+    name: ARA_Revisar_Basura
+    purpose: revision_reversible_de_phishing_o_basura
+    allowed_default_actions:
+      - list_envelopes
+    requires_confirmation_for:
+      - move_into
+      - move_out
+  trash:
+    name: Papelera
+    purpose: papelera_servidor
+    allowed_default_actions: []
+    requires_confirmation_for:
+      - any_move_into
+      - any_delete
+  sent:
+    name: Elementos enviados
+    purpose: enviados_servidor
+    allowed_default_actions:
+      - list_envelopes_only_if_requested
+  drafts:
+    name: Borradores
+    purpose: borradores_servidor
+    allowed_default_actions:
+      - list_envelopes_only_if_requested
+  spam:
+    name: Spam
+    purpose: spam_servidor
+    allowed_default_actions:
+      - list_envelopes_only_if_requested
+
+rules:
+  - IDs de Himalaya son relativos a cada carpeta.
+  - Antes de mover, confirmar carpeta origen e IDs actuales.
+  - Después de mover, listar origen y destino.

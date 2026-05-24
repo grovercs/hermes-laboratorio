@@ -98,6 +98,8 @@ Caso validado:
 
 ## 9. Pendientes técnicos
 
+Continuación documentada en `docs/ara-mail-manager-siguiente-fase.md`.
+
 - No hay conexión/proveedor secundario validado.
 - No hay selección automática de modelo según dificultad.
 - Investigar modelos de mayor contexto en `ara-lab`.

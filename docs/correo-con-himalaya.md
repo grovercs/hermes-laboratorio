@@ -11,23 +11,75 @@ Usar Himalaya CLI para revisar correo bajo demanda con ARA, de forma controlada 
 - Versión: `himalaya v1.2.0 +imap +maildir +pgp-commands +smtp +wizard +sendmail`.
 - Ruta de instalación: `C:\Users\Usuario\scoop\apps\himalaya\current`.
 - Shim: `C:\Users\Usuario\scoop\shims\himalaya`.
-- Configuración IMAP de prueba creada localmente para la cuenta `vielhacomputer`.
-- La configuración no contiene contraseña en texto plano.
-- Script local `get-imap-password.ps1` creado sin secretos para leer la contraseña desde variable temporal.
+- Configuración IMAP funcional para la cuenta `vielhacomputer`.
+- CredentialManager está instalado y se usa para guardar la contraseña fuera del repositorio.
+- Target de Windows Credential Manager usado: `himalaya:info@vielhacomputer.com`.
+- La configuración real de Himalaya no contiene contraseña en texto plano.
+- Helper local existente y probado: `C:\Users\Usuario\.config\himalaya\get-imap-password.ps1`.
+- El `config.toml` real usa ruta compatible con PowerShell y Hermes/Git Bash: `C:/Users/Usuario/.config/himalaya/get-imap-password.ps1`.
+- Himalaya lista carpetas correctamente.
+- Himalaya lee previews correctamente con `message read --preview`.
 - No hay SMTP configurado.
 - No se han guardado credenciales en el repositorio.
+- No se han abierto adjuntos.
+- No se han seguido enlaces.
+- No se han enviado correos.
+- No se han borrado correos.
+- No se han movido correos hoy.
 
 ## Reglas de seguridad
 
-- Solo IMAP al principio.
-- Nada de SMTP todavía.
+- Solo IMAP por ahora.
+- Nada de SMTP configurado.
 - No enviar correos.
 - No borrar correos.
 - No mover correos.
 - No marcar correos como leídos.
 - No abrir adjuntos.
 - No guardar credenciales en repositorios.
-- No leer cuerpos completos salvo autorización explícita.
+- Leer cuerpos solo en modo preview y bajo criterio de triage autorizado: `himalaya message read --preview`.
+- No seguir enlaces desde correos.
+
+## Estado actual: Himalaya + CredentialManager
+
+Estado confirmado:
+
+- CredentialManager está instalado.
+- Himalaya funciona con la cuenta `vielhacomputer`.
+- El target de Credential Manager usado es:
+
+```text
+himalaya:info@vielhacomputer.com
+```
+
+- El helper existe y funciona:
+
+```text
+C:\Users\Usuario\.config\himalaya\get-imap-password.ps1
+```
+
+- El config real de Himalaya usa ruta compatible con PowerShell y Hermes/Git Bash:
+
+```text
+C:/Users/Usuario/.config/himalaya/get-imap-password.ps1
+```
+
+- Himalaya lista carpetas correctamente.
+- Himalaya lee previews correctamente con `--preview`.
+- No hay SMTP configurado.
+
+Límites respetados en el estado actual:
+
+- No se han abierto adjuntos.
+- No se han seguido enlaces.
+- No se han enviado correos.
+- No se han borrado correos.
+- No se han movido correos hoy.
+
+Aviso importante:
+
+- `New-StoredCredential` puede mostrar el campo `Password` si se deja imprimir el objeto completo.
+- En futuras operaciones de creación o actualización de credenciales, usar siempre `| Out-Null` para evitar que el objeto se imprima en pantalla.
 
 ## Prueba realizada con cuenta `vielhacomputer`
 

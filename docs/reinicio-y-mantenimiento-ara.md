@@ -24,7 +24,7 @@ Si Hermes pregunta o vuelve al prompt, revisa la situación antes de lanzar otra
 
 ## Cómo reiniciar ARA desde `C:\proyectos\hermes`
 
-1. Abre PowerShell o Windows Terminal.
+1. Abre Windows Terminal con PowerShell 7 (`pwsh`) como entorno principal recomendado.
 2. Entra en el workspace local:
 
 ```powershell
@@ -36,6 +36,21 @@ cd C:\proyectos\hermes
 ```powershell
 hermes
 ```
+
+## Entorno recomendado: PowerShell 7
+
+Estado confirmado:
+
+- PowerShell 7.6.2 está instalado y funciona mediante `pwsh`.
+- Windows PowerShell 5.1 puede mostrar mal caracteres UTF-8 al leer Markdown.
+- Con PowerShell 7 los archivos Markdown se leen correctamente sin modificar los archivos.
+
+Recomendación operativa:
+
+1. Usar PowerShell 7 / `pwsh` para revisar, mantener y documentar ARA/Hermes en Windows.
+2. No corregir archivos Markdown solo porque Windows PowerShell 5.1 los muestre con caracteres raros.
+3. Si aparecen acentos o símbolos corruptos en pantalla, volver a comprobar primero desde PowerShell 7.
+4. Mantener Windows PowerShell 5.1 solo como compatibilidad puntual, no como entorno principal.
 
 ## Cuándo usar `/new`
 

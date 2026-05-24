@@ -19,6 +19,14 @@ La instancia principal actual de ARA usa como HOME real de Hermes:
 C:\Users\Usuario\AppData\Local\hermes
 ```
 
+Nota operativa confirmada:
+
+- ARA principal: `C:\Users\Usuario\AppData\Local\hermes`.
+- ARA Lab: `C:\proyectos\hermes\instances\ara-lab`.
+- Para arrancar la ARA principal correctamente hay que definir `HERMES_HOME` explícitamente con `C:\Users\Usuario\AppData\Local\hermes`.
+- Smart App Control fue desactivado porque bloqueaba `hermes.exe`.
+- ARA Lab existe, pero todavía no está configurada con proveedor/modelo.
+
 El ejecutable compartido actual está en:
 
 ```text

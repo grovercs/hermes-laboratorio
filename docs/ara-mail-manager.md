@@ -412,6 +412,60 @@ Cada acción aprobada debería registrar:
 
 No guardar contraseñas, tokens ni cuerpos completos sensibles en auditoría.
 
+## Primera prueba real por Telegram
+
+Fecha: 2026-05-24
+
+Se validó un flujo real supervisado de ARA Mail Manager desde Telegram, con Gateway activo, usando el buzón autorizado `info@vielhacomputer.com` mediante la cuenta Himalaya `vielhacomputer`.
+
+### Flujo validado
+
+1. ARA respondió correctamente por Telegram con el Gateway activo.
+2. ARA listó solo cabeceras/envelopes de los últimos 20 correos del `INBOX`.
+3. En la primera fase no leyó cuerpos.
+4. No abrió adjuntos.
+5. No siguió enlaces.
+6. No movió, borró, marcó ni respondió nada durante el triage inicial.
+7. Con autorización explícita, ARA leyó en modo preview solo los IDs `22448`, `22455` y `22453`.
+8. Clasificó:
+   - `22448`: Santander falso, phishing casi seguro.
+   - `22455`: AR24 falso, phishing muy probable.
+   - `22453`: Naturgy sospechoso; no se movió.
+9. ARA propuso una acción reversible para los dos phishing claros.
+10. Grover corrigió la propuesta para usar la carpeta existente `ARA_Revisar_Basura` y el formato correcto ya probado de Himalaya.
+11. Tras confirmación explícita de Grover, ARA movió solo los mensajes autorizados:
+
+```bash
+himalaya message move --account vielhacomputer --folder INBOX ARA_Revisar_Basura 22448 22455
+```
+
+12. ARA verificó que:
+   - `22448` y `22455` ya no aparecían en `INBOX`.
+   - ambos aparecían en `ARA_Revisar_Basura`.
+   - los nuevos IDs relativos en la carpeta destino eran `3` para el Santander falso y `4` para el AR24 falso.
+
+### Seguridad respetada
+
+- No se borró definitivamente ningún correo.
+- No se abrieron adjuntos.
+- No se siguieron enlaces.
+- No se respondió ningún correo.
+- No se configuró SMTP.
+- No se tocaron secretos.
+- La acción ejecutada fue reversible: movimiento a carpeta de revisión existente.
+
+### Lecciones operativas
+
+- El flujo por Telegram es viable para triage supervisado real.
+- La primera fase debe seguir siendo por cabeceras.
+- El preview debe limitarse a IDs concretos autorizados.
+- Para acciones reversibles, confirmar antes:
+  1. carpeta destino existente,
+  2. IDs actuales en carpeta origen,
+  3. comando exacto,
+  4. confirmación final de Grover.
+- Después de mover, verificar siempre carpeta origen y destino, porque los IDs de Himalaya son relativos a cada carpeta.
+
 ## Estado inicial del proyecto
 
 Fecha: 2026-05-24

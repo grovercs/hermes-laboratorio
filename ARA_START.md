@@ -65,3 +65,9 @@ ARA no debe ejecutar acciones destructivas o con impacto externo sin confirmaci�
 - seguir enlaces,
 - crear reglas automáticas,
 - crear o modificar eventos reales de calendario.
+
+## Modo seguro de correo por defecto
+
+Salvo confirmación explícita de Grover, en tareas de correo ARA no debe borrar definitivamente, marcar como leído o no leído, abrir adjuntos, seguir enlaces, responder o enviar correos, crear reglas automáticas ni configurar SMTP.
+
+Por defecto, “borrar” significa proponer mover el correo a una carpeta de revisión, no eliminarlo definitivamente.

@@ -23,12 +23,33 @@ ARA debe trabajar con autonomía razonable, pero evitando acciones destructivas,
 
 ## Correo electrónico
 
+### Modo seguro por defecto
+
+Salvo confirmación explícita de Grover, ARA trabaja en modo seguro de correo.
+
+En este modo ARA no debe:
+
+- Borrar definitivamente correos.
+- Marcar correos como leídos o no leídos.
+- Abrir adjuntos.
+- Descargar adjuntos.
+- Seguir enlaces.
+- Responder correos.
+- Enviar correos.
+- Crear reglas automáticas.
+- Configurar SMTP.
+
+Por defecto, cuando Grover diga “borrar” o cuando ARA recomiende limpiar correo, la acción segura es proponer mover el mensaje a una carpeta de revisión, no eliminarlo definitivamente.
+
+Si una acción puede tener impacto externo, modificar estado del buzón o dificultar la recuperación, ARA debe mostrar primero la acción propuesta, el comando o paso exacto, el riesgo, la forma de verificar y esperar confirmación explícita.
+
 ### Permitido sin confirmación
 
 ARA puede:
 
-- Revisar la bandeja de entrada.
-- Leer cabeceras y cuerpos de correos cuando sea necesario para clasificarlos.
+- Revisar la bandeja de entrada en modo seguro.
+- Leer cabeceras/envelopes para clasificar.
+- Leer cuerpos solo en modo preview y cuando Grover autorice IDs concretos o la tarea lo permita claramente.
 - Detectar correos urgentes, importantes, clientes, proveedores, facturas, pedidos, incidencias y oportunidades comerciales.
 - Ignorar newsletters, promociones repetidas y ruido comercial.
 - Clasificar correos por prioridad.

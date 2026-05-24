@@ -25,7 +25,7 @@ Usar Himalaya CLI para revisar correo bajo demanda con ARA, de forma controlada 
 - No se han seguido enlaces.
 - No se han enviado correos.
 - No se han borrado correos.
-- No se han movido correos hoy.
+- Ya existe una prueba real posterior de acción reversible por Telegram: mover correos autorizados a `ARA_Revisar_Basura` sin borrado definitivo.
 
 ## Reglas de seguridad
 
@@ -74,7 +74,7 @@ Límites respetados en el estado actual:
 - No se han seguido enlaces.
 - No se han enviado correos.
 - No se han borrado correos.
-- No se han movido correos hoy.
+- Ya existe una prueba real posterior de acción reversible por Telegram: mover correos autorizados a `ARA_Revisar_Basura` sin borrado definitivo.
 
 Aviso importante:
 
@@ -407,3 +407,48 @@ Regla operativa:
 3. Usar siempre `--folder INBOX` cuando el origen sea `INBOX`.
 4. Después de mover, listar la carpeta destino y la carpeta origen para verificar el resultado.
 5. No borrar mensajes salvo autorización explícita y tras confirmar carpeta e IDs actuales.
+
+---
+
+## Flujo validado de acción reversible por Telegram
+
+Fecha: 24/05/2026
+
+Se validó una acción reversible real desde Telegram para el buzón `info@vielhacomputer.com`, manteniendo IMAP-only y sin SMTP.
+
+### Secuencia segura validada
+
+1. Listar primero solo cabeceras/envelopes del `INBOX`.
+2. Leer cuerpos solo con `message read --preview` y solo para IDs concretos autorizados.
+3. Clasificar riesgo sin abrir adjuntos ni seguir enlaces.
+4. Proponer la acción reversible antes de ejecutarla.
+5. Confirmar que la carpeta destino existe.
+6. Confirmar que los IDs siguen estando en la carpeta origen.
+7. Mostrar el comando exacto.
+8. Esperar confirmación explícita final.
+9. Ejecutar el movimiento.
+10. Verificar carpeta origen y carpeta destino.
+
+### Comando validado
+
+```bash
+himalaya message move --account vielhacomputer --folder INBOX ARA_Revisar_Basura 22448 22455
+```
+
+### Resultado validado
+
+- Los mensajes `22448` y `22455` dejaron de aparecer en `INBOX`.
+- Los mensajes aparecieron en `ARA_Revisar_Basura`.
+- Los nuevos IDs relativos en destino fueron:
+  - `3` para el Santander falso.
+  - `4` para el AR24 falso.
+
+### Regla operativa añadida
+
+Para acciones reversibles con Himalaya, usar el orden probado:
+
+```bash
+himalaya message move --account vielhacomputer --folder INBOX ARA_Revisar_Basura <ID1> <ID2>
+```
+
+Recordatorio: los IDs son relativos a cada carpeta; después de mover, relistar siempre origen y destino.

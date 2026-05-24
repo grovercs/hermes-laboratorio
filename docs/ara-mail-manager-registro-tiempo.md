@@ -9,6 +9,8 @@ Registro de tiempo dedicado al diseño y creación de ARA Mail Manager.
 - Estado inicial: diseño del sistema multi-buzón supervisado.
 - Pendiente: definir arquitectura, scripts, permisos, flujo de aprendizaje de estilo y replicabilidad para clientes.
 - Horas: pendiente de completar al cierre de la sesión
+- Validación real por Telegram: se confirmó el flujo supervisado con Gateway activo para `info@vielhacomputer.com`: triage por cabeceras, preview autorizado de IDs concretos, propuesta de acción reversible, confirmación explícita y movimiento verificado a `ARA_Revisar_Basura`.
+- Horas de esta validación: pendiente de cierre
 
 ## Seguridad
 

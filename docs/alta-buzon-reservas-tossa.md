@@ -159,3 +159,33 @@ Conclusión:
 - No seguir enlaces.
 - No leer cuerpos salvo instrucción concreta.
 - Usar siempre --account reservas-tossa para este buzón.
+
+## Prueba SMTP
+
+Fecha: 2026-05-27
+
+Comando usado:
+
+    himalaya message send --account reservas-tossa $msg
+
+Resultado:
+
+    Message successfully sent!
+
+Verificación en enviados:
+
+    himalaya envelope list --account reservas-tossa --folder "Elementos enviados" --page-size 5
+
+Resultado:
+
+    Apareció el correo "Prueba SMTP reservas-tossa" en Elementos enviados.
+
+Conclusión:
+
+    SMTP OK.
+    Copia en enviados OK.
+
+Nota:
+
+    El mensaje de prueba apareció con fecha 1970-01-01 porque el raw message usado para la prueba manual no incluía cabecera Date.
+    Para futuros envíos manuales raw conviene incluir cabecera Date o usar flujos de redacción/respuesta que generen cabeceras completas.

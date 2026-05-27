@@ -105,7 +105,23 @@ Orden propuesto para ARA principal:
 - No copiar secretos de ARA principal a `ara-lab`.
 - No aplicar failover en producción sin backup previo.
 - No eliminar la configuración actual del proveedor principal.
+- No editar YAML a mano para configurar failover en ARA principal; usar el comando nativo de Hermes y hacer backup antes.
 
-## 9. Fecha de esta evaluación
+## 9. Nota posterior — fallback manual descartado
+
+Fecha: 2026-05-27
+
+Durante la resolución del incidente de ARA principal con `openai-codex` / `gpt-5.5`, se dejó documentado que un intento de fallback manual con Qwen produjo respuesta vacía o solo `thinking`, sin salida útil para Grover.
+
+Estado final recomendado tras la resolución:
+
+- `fallback_providers: []`
+- Proveedor principal: `openai-codex`
+- Modelo principal: `gpt-5.5`
+- Contexto operativo: `272000`
+
+Conclusión: no repetir cambios manuales de YAML para failover. Si se vuelve a probar failover, hacerlo primero en laboratorio y aplicarlo con el comando nativo de Hermes, no editando la configuración a mano.
+
+## 10. Fecha de esta evaluación
 
 2026-05-25 — Pruebas realizadas en `ara-lab` con OpenRouter, sesión de laboratorio supervisada.

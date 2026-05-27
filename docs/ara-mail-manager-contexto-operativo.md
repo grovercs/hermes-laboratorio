@@ -130,7 +130,24 @@ Límites respetados:
 - No se mostraron secretos.
 - Los envíos fueron pruebas controladas y confirmadas explícitamente.
 
-## 10. Pendientes técnicos
+## 10. Incidente Hermes/ARA principal — config v24
+
+Fecha: 2026-05-27
+
+Incidente documentado:
+
+- ARA principal mostraba `TypeError: 'NoneType' object is not iterable` usando `openai-codex` / `gpt-5.5`.
+- El modelo sí llegaba a responder, pero Hermes terminaba mostrando error al finalizar la interacción.
+- En `openai-codex` había 2 credenciales; la antigua `#1` estaba invalidada con `token_invalidated` / `401`.
+- Se eliminó la credencial antigua y quedó solo `openai-codex-oauth-2`.
+- La configuración verificada quedó con `model.default: gpt-5.5`, `provider: openai-codex`, `context_length: 272000` y `fallback_providers: []`.
+- `hermes doctor` detectó configuración antigua `v23`; antes de reparar se creó backup en `C:\Users\Usuario\AppData\Local\hermes\config.yaml.backup-before-doctor-fix-20260527-162018`.
+- Tras ejecutar `hermes doctor --fix`, la configuración migró correctamente de `v23` a `v24`.
+- Pruebas posteriores: `Responde solo: OK` respondió limpio sin error, y una segunda prueba confirmó que ARA principal podía trabajar correctamente tras la migración.
+
+Conclusión operativa: si reaparece un error similar, revisar primero credenciales OAuth antiguas/invalidas y versión de configuración antes de tocar otros ajustes. No documentar ni copiar secretos.
+
+## 11. Pendientes técnicos
 
 Continuación documentada en `docs/ara-mail-manager-siguiente-fase.md`.
 
@@ -140,7 +157,7 @@ Continuación documentada en `docs/ara-mail-manager-siguiente-fase.md`.
 - Investigar fallback de proveedor/modelo → ver `docs/ara-modelos-y-failover.md`.
 - Investigar configuración de compresión/contexto.
 
-## 11. Regla de rendimiento
+## 12. Regla de rendimiento
 
 - Usar Telegram para tareas cortas, decisiones rápidas y triage operativo.
 - Usar consola para documentación, Git y cambios de repo.

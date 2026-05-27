@@ -28,6 +28,19 @@ Registro de tiempo dedicado al diseño y creación de ARA Mail Manager.
 - Contexto operativo actualizado con referencia al nuevo documento.
 - Horas: pendiente de completar al cierre de la sesión
 
+## 2026-05-27
+
+- Proyecto: ARA Mail Manager / ARA principal.
+- Objetivo: documentar incidente y resolución de Hermes/ARA principal tras el error `TypeError: 'NoneType' object is not iterable` con `openai-codex` / `gpt-5.5`.
+- Estado inicial: el modelo llegaba a responder, pero Hermes terminaba mostrando error al finalizar la respuesta.
+- Diagnóstico documentado: `openai-codex` tenía 2 credenciales; la credencial antigua `#1` estaba invalidada con `token_invalidated` / `401` y se eliminó, quedando solo `openai-codex-oauth-2`.
+- Configuración verificada: `model.default: gpt-5.5`, `provider: openai-codex`, `context_length: 272000`, `fallback_providers: []`.
+- `hermes doctor` detectó configuración antigua `v23`; se creó backup previo en `C:\Users\Usuario\AppData\Local\hermes\config.yaml.backup-before-doctor-fix-20260527-162018`.
+- Acción aplicada fuera de este modo documentación: `hermes doctor --fix`, con migración correcta `v23` → `v24`.
+- Validación posterior: la prueba `Responde solo: OK` respondió limpio sin error, y una segunda prueba confirmó funcionamiento normal de ARA principal tras la migración.
+- Seguridad de esta sesión documental: no se tocó configuración real, no se modificó `.env`, no se abrieron correos, no se enviaron correos, no se hizo commit ni push.
+- Horas: pendiente de completar al cierre de la sesión.
+
 ## Seguridad
 
 Este registro no debe contener secretos, contraseñas, tokens, contenidos privados de correos ni credenciales.

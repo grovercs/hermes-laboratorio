@@ -189,3 +189,64 @@ Nota:
 
     El mensaje de prueba apareció con fecha 1970-01-01 porque el raw message usado para la prueba manual no incluía cabecera Date.
     Para futuros envíos manuales raw conviene incluir cabecera Date o usar flujos de redacción/respuesta que generen cabeceras completas.
+
+## Mejora de protocolo tras prueba ARA/Gateway
+
+Fecha: 2026-05-28
+
+Se realizó una prueba desde Telegram pidiendo a ARA listar las últimas 5 cabeceras del INBOX de la cuenta:
+
+    reservas-tossa
+
+Resultado:
+
+    ARA listó cabeceras correctamente.
+    No leyó cuerpos.
+    No abrió adjuntos.
+    No siguió enlaces.
+    No envió correos.
+    No se activó fallback OpenRouter/DeepSeek; los logs mostraron provider=openai-codex y model=gpt-5.5.
+
+Comando correcto de Himalaya para listar cabeceras:
+
+    himalaya envelope list --account reservas-tossa --folder INBOX --page-size 5
+
+Nota operativa:
+
+    ARA intentó inicialmente una sintaxis incorrecta y recibió error de argumento --account.
+    Para futuras instrucciones, indicar explícitamente que debe usar `himalaya envelope list` con `--account`, `--folder` y `--page-size`.
+
+## Regla de seguridad: ocultar códigos sensibles
+
+Cuando ARA liste cabeceras o resuma correos, debe ocultar códigos de verificación, login o acceso.
+
+Ejemplos:
+
+    Beds24.com - Login code 102437
+
+Debe mostrarse como:
+
+    Beds24.com - Login code ******
+
+Aplicar la misma regla a:
+
+    - Códigos de login
+    - Códigos 2FA
+    - Códigos OTP
+    - Enlaces mágicos de acceso
+    - Tokens visibles en asuntos o previews
+    - Cualquier número que parezca credencial temporal
+
+Motivo:
+
+    Evitar exponer códigos sensibles en Telegram, logs o resúmenes.
+    Aunque los códigos caduquen rápido, deben tratarse como información sensible.
+
+## Nota sobre flags Seen
+
+Durante la prueba, algunos correos aparecieron con flag Seen.
+
+Confirmación operativa:
+
+    Esos correos ya habían sido abiertos previamente por Grover.
+    No se considera que ARA los haya marcado como leídos durante esta prueba.

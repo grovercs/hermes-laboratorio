@@ -177,3 +177,87 @@ Nota:
 ## Regla operativa
 
 Para trámites oficiales o institucionales, ARA debe recomendar usar direccion-tossa o poner dirección en copia antes de enviar desde reservas-tossa.
+
+## Prueba de borrador real con ARA/Gateway
+
+Fecha: 2026-05-29
+
+## Contexto
+
+Se probó el flujo completo de trabajo supervisado para una comunicación institucional relacionada con VisitTossa.
+
+El correo original llegó a:
+
+    reservas-tossa
+
+Pero por tratarse de una comunicación institucional, ARA recomendó preparar la respuesta desde:
+
+    direccion-tossa
+
+## Flujo validado
+
+1. ARA analizó el contexto del correo recibido en `reservas-tossa`.
+2. ARA recomendó usar `direccion-tossa` para el envío institucional.
+3. Se preparó el cuerpo final aprobado en catalán.
+4. Se pidió a ARA guardar el mensaje como borrador real en `direccion-tossa`.
+5. ARA no envió nada.
+6. ARA guardó el borrador en la carpeta Borradores.
+
+## Resultado inicial
+
+ARA informó que se habían creado dos borradores iguales:
+
+    ID 2
+    ID 3
+
+No eliminó el duplicado sin autorización.
+
+## Limpieza del duplicado
+
+Se movió el borrador duplicado ID 2 a Papelera con:
+
+    himalaya message move --account direccion-tossa --folder Borradores Papelera 2
+
+Resultado:
+
+    Message(s) successfully moved from Borradores to Papelera!
+
+## Verificación final
+
+Comando:
+
+    himalaya envelope list --account direccion-tossa --folder Borradores --page-size 5
+
+Resultado:
+
+    Quedó un único borrador válido:
+
+    ID 3
+    Subject: RE: Sol·licitud d'inclusió...
+    From: direccion@alojamientostossademar.com
+    Date: 2026-05-29 12:21+00:00
+
+## Conclusión
+
+Flujo validado:
+
+    correo recibido en reservas-tossa
+    -> análisis por ARA
+    -> recomendación de canal institucional
+    -> borrador preparado para direccion-tossa
+    -> guardado como borrador real
+    -> revisión humana antes de envío
+
+Regla confirmada:
+
+    ARA puede preparar y guardar borradores reales,
+    pero no debe enviar nada sin confirmación explícita.
+
+## Nota operativa
+
+Si ARA crea duplicados al guardar borradores, no debe borrarlos automáticamente.
+Debe avisar y pedir confirmación humana.
+
+Para limpieza reversible se debe mover el duplicado a Papelera, no expurgar.
+
+No usar expunge salvo confirmación explícita.

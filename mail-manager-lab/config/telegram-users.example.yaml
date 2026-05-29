@@ -1,0 +1,243 @@
+# Ejemplo de configuración de identidad y permisos para ARA Mail Manager.
+# No poner credenciales aquí.
+# No poner contraseñas aquí.
+# No poner tokens aquí.
+# Este archivo es un ejemplo versionable.
+# El archivo real debería llamarse, por ejemplo:
+# telegram-users.yaml
+# y debería estar excluido de Git si contiene IDs reales o datos sensibles.
+
+version: 1
+
+security:
+  identity_key: telegram_user_id
+  allow_access_by_written_name: false
+  allow_access_by_username: false
+  allow_access_by_phone: false
+  only_owner_can_authorize_users: true
+  default_user_status: inactive
+
+  forbidden_actions:
+    - delete_forever
+
+  sensitive_actions_require_explicit_confirmation:
+    - send_reply
+    - move_to_review_trash
+    - open_attachments
+    - follow_links
+
+  default_denial_message: >
+    Tu usuario de Telegram no está autorizado para esta acción.
+    Solo Grover puede conceder o ampliar permisos.
+
+organizations:
+  vielha-computer:
+    name: "Vielha Computer"
+    description: "Empresa principal de informática, telecomunicaciones y servicios web."
+    mailboxes:
+      - vielhacomputer
+      - administracion-vielha
+
+  alojamientos-tossa:
+    name: "Alojamientos Tossa de Mar"
+    description: "Gestión de El Bergantí y L'Hostalet de Tossa."
+    mailboxes:
+      - reservas-tossa
+      - direccion-tossa
+
+mailboxes:
+  vielhacomputer:
+    account: "vielhacomputer"
+    email: "info@vielhacomputer.com"
+    organization: "vielha-computer"
+    purpose: "Correo principal de Vielha Computer."
+    sensitivity: "medium_high"
+    safe_review_folder: "ARA_Revisar_Basura"
+
+  administracion-vielha:
+    account: "administracion-vielha"
+    email: "administracion@vielhacomputer.com"
+    organization: "vielha-computer"
+    purpose: "Facturas, proveedores, bancos, gestoría, pagos y administración."
+    sensitivity: "high"
+    safe_review_folder: "ARA_Revisar_Basura"
+    special_rules:
+      - "No abrir adjuntos sin permiso explícito."
+      - "No seguir enlaces bancarios."
+      - "No mostrar códigos OTP o login."
+      - "No enviar respuestas sobre pagos sin confirmación explícita."
+
+  reservas-tossa:
+    account: "reservas-tossa"
+    email: "reservas@alojamientostossademar.com"
+    organization: "alojamientos-tossa"
+    purpose: "Reservas, clientes, formularios web, Beds24 y Booking."
+    sensitivity: "medium"
+    safe_review_folder: "ARA_Revisar_Basura"
+    special_rules:
+      - "No modificar reservas."
+      - "No confirmar condiciones comerciales sin validación."
+      - "No enviar respuestas sin confirmación explícita."
+
+  direccion-tossa:
+    account: "direccion-tossa"
+    email: "direccion@alojamientostossademar.com"
+    organization: "alojamientos-tossa"
+    purpose: "VisitTossa, Ayuntamiento, turismo, asociaciones, federaciones y trámites oficiales."
+    sensitivity: "high"
+    safe_review_folder: "ARA_Revisar_Basura"
+    special_rules:
+      - "Cuidado con plazos administrativos."
+      - "Cuidado con documentos oficiales."
+      - "No responder en nombre de dirección sin confirmación explícita."
+
+roles:
+  owner:
+    description: "Propietario del sistema. Control total."
+    can_authorize_users: true
+    default_permissions:
+      - read_headers
+      - preview_safe
+      - classify
+      - draft_reply
+      - send_reply
+      - move_to_review_trash
+      - open_attachments
+      - follow_links
+
+  admin:
+    description: "Administrador limitado por organización."
+    can_authorize_users: false
+    default_permissions:
+      - read_headers
+      - preview_safe
+      - classify
+      - draft_reply
+      - move_to_review_trash
+
+  operator:
+    description: "Usuario operativo limitado a buzones concretos."
+    can_authorize_users: false
+    default_permissions:
+      - read_headers
+      - preview_safe
+      - classify
+      - draft_reply
+
+  viewer:
+    description: "Usuario de solo lectura."
+    can_authorize_users: false
+    default_permissions:
+      - read_headers
+      - classify
+
+users:
+  grover:
+    display_name: "Grover Castellon"
+    telegram_user_id: 000000000
+    telegram_username: "grovercs"
+    status: "active"
+    role: "owner"
+    organizations:
+      - vielha-computer
+      - alojamientos-tossa
+    mailboxes:
+      - vielhacomputer
+      - administracion-vielha
+      - reservas-tossa
+      - direccion-tossa
+    permissions:
+      - read_headers
+      - preview_safe
+      - classify
+      - draft_reply
+      - send_reply
+      - move_to_review_trash
+      - open_attachments
+      - follow_links
+
+  sharon-example:
+    display_name: "Sharon"
+    telegram_user_id: 111111111
+    telegram_username: null
+    status: "inactive"
+    role: "operator"
+    organizations:
+      - vielha-computer
+    mailboxes:
+      - administracion-vielha
+    permissions:
+      - read_headers
+      - preview_safe
+      - classify
+      - draft_reply
+    notes:
+      - "Ejemplo: activar solo cuando Grover confirme su Telegram ID real."
+      - "No puede autorizar usuarios."
+      - "No puede acceder a reservas-tossa ni direccion-tossa."
+      - "No puede enviar correos sin permiso adicional."
+
+natural_language_resolution:
+  rules:
+    - phrase_examples:
+        - "revisa mi correo de administración"
+        - "mira administración"
+        - "comprueba el correo administrativo"
+      preferred_mailbox_if_allowed: "administracion-vielha"
+      requires_user_permission: true
+
+    - phrase_examples:
+        - "revisa reservas"
+        - "mira el correo de reservas"
+        - "hay reservas nuevas"
+      preferred_mailbox_if_allowed: "reservas-tossa"
+      requires_user_permission: true
+
+    - phrase_examples:
+        - "mira dirección"
+        - "revisa si hay algo del ayuntamiento"
+        - "comprueba si ha escrito VisitTossa"
+      preferred_mailbox_if_allowed: "direccion-tossa"
+      requires_user_permission: true
+
+    - phrase_examples:
+        - "revisa el correo principal"
+        - "mira info"
+        - "comprueba el correo de Vielha Computer"
+      preferred_mailbox_if_allowed: "vielhacomputer"
+      requires_user_permission: true
+
+confirmation_policy:
+  valid_send_confirmations:
+    - "sí, envía"
+    - "si, envia"
+    - "envíalo"
+    - "envialo"
+    - "confirmo el envío"
+    - "confirmo el envio"
+    - "puedes enviarlo"
+
+  ambiguous_confirmations:
+    - "ok"
+    - "vale"
+    - "hazlo"
+    - "perfecto"
+    - "me gusta"
+    - "adelante"
+
+  response_to_ambiguous_confirmation: >
+    Necesito una confirmación más clara antes de hacer esta acción.
+    Por ejemplo: "Sí, envía" o "Confirmo el envío".
+
+audit:
+  recommended_fields:
+    - timestamp
+    - telegram_user_id
+    - internal_user
+    - organization
+    - mailbox
+    - requested_action
+    - performed_action
+    - message_ids
+    - confirmation_text
+    - result

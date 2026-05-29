@@ -37,7 +37,10 @@ Este archivo es una plantilla inicial para propuestas de respuesta. No debe cont
 ## Trámites oficiales e institucionales
 
 - Para trámites oficiales, directorios turísticos, administraciones públicas, asociaciones o federaciones, recomendar enviar desde dirección, gerencia o administración, o poner a dirección en copia.
+- Para comunicaciones institucionales de Alojamientos Tossa de Mar, si corresponde, recomendar el envío desde `direccion-tossa`.
 - Si solo está configurado el buzón de reservas, preparar el texto pero avisar antes de enviar: “revisar si debe salir desde dirección”.
+- Cuando ya se haya explicado que Alojamientos Tossa de Mar gestiona operativamente El Bergantí y L’Hostalet de Tossa, evitar repetir la fórmula completa en el mismo correo.
+- En menciones posteriores usar fórmulas más limpias como “aquests establiments” o “les dades d’aquests establiments”.
 
 ## Aprendizaje
 

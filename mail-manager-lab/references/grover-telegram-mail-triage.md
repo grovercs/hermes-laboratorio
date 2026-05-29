@@ -40,17 +40,25 @@ For header-only reviews across any mailbox, use the multi-mailbox header review 
    - adjuntos abiertos
    - enlaces abiertos
    - acciones ejecutadas
-2. Global count summary:
-   - total revisados
-   - facturas
-   - pagos/bancos
-   - proveedores/marketing
-   - alarmas/servicios
-   - laboral/administrativo sensible
-   - posible phishing
-   - spam probable
-   - informativos
-   - requieren acción prioritaria
+2. Global summary split into two sections to avoid double-counting:
+   - Count by primary category:
+     - total revisados
+     - facturas
+     - pagos/bancos
+     - proveedores/marketing
+     - alarmas/servicios
+     - laboral/administrativo sensible
+     - posible phishing
+     - spam probable
+     - otros/informativos principales
+     - requieren acción prioritaria
+   - Secondary labels detected:
+     - informativo
+     - seguridad
+     - pago/servicio digital
+     - oferta/producto
+     - posible duplicado/corrección
+     - any other useful label
 3. Priority block:
    - prioridad alta
    - prioridad media
@@ -67,9 +75,9 @@ For header-only reviews across any mailbox, use the multi-mailbox header review 
    - orden recomendado de actuación
    - reminder that no bodies were read, no attachments opened, no links followed, and no actions executed.
 
-If categories overlap, assign one primary category for counting and add secondary labels separately to avoid confusing counts.
+If categories overlap, assign one primary category for counting and add secondary labels separately to avoid confusing counts. Do not count the same email twice in primary categories. For example, TD SYNNEX can be primary `proveedores/marketing` and secondary `informativo`.
 
-Then list each message with: ID, fecha, remitente, asunto, tipo probable, riesgo, acción recomendada. Do not read bodies, open attachments, follow links, or execute actions unless explicitly authorized.
+Then list each message with: ID, fecha, remitente, asunto, tipo probable, etiquetas secundarias if any, riesgo, acción recomendada. Do not read bodies, open attachments, follow links, or execute actions unless explicitly authorized.
 
 Standard category markers:
 

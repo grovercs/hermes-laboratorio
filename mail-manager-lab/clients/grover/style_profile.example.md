@@ -29,6 +29,11 @@ Este archivo es una plantilla inicial para propuestas de respuesta. No debe cont
 - Evitar sonar como formulario genérico.
 - Si hay riesgo o incidencia, explicar primero el impacto y luego la acción recomendada.
 
+## Redacción prudente
+
+- Cuando una relación entre empresas, alojamientos o marcas no esté confirmada, usar fórmulas prudentes que eviten afirmar más de lo sabido.
+- Ejemplo en catalán: “la seva possible vinculació o gestió conjunta amb L’Hostalet de Tossa / Alojamientos Tossa de Mar”.
+
 ## Aprendizaje
 
 Solo actualizar este perfil con correcciones aprobadas explícitamente por usuario autorizado o por el propietario autorizado del buzón.

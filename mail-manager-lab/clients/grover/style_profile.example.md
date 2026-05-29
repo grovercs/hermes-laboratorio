@@ -34,6 +34,11 @@ Este archivo es una plantilla inicial para propuestas de respuesta. No debe cont
 - Cuando una relación entre empresas, alojamientos o marcas no esté confirmada, usar fórmulas prudentes que eviten afirmar más de lo sabido.
 - Ejemplo en catalán: “la seva possible vinculació o gestió conjunta amb L’Hostalet de Tossa / Alojamientos Tossa de Mar”.
 
+## Trámites oficiales e institucionales
+
+- Para trámites oficiales, directorios turísticos, administraciones públicas, asociaciones o federaciones, recomendar enviar desde dirección, gerencia o administración, o poner a dirección en copia.
+- Si solo está configurado el buzón de reservas, preparar el texto pero avisar antes de enviar: “revisar si debe salir desde dirección”.
+
 ## Aprendizaje
 
 Solo actualizar este perfil con correcciones aprobadas explícitamente por usuario autorizado o por el propietario autorizado del buzón.
